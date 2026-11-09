@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block titulo %}Agendar consulta{% endblock %}
+{% block conteudo %}
+<h1>Agendar consulta</h1>
+{% include "_mensagens.html" %}
+<form method="post" action="/agendar" class="campos">
+  <div>
+    <label for="paciente_nome">Nome</label>
+    <input id="paciente_nome" name="paciente_nome" type="text" autocomplete="name"
+           required minlength="3" maxlength="100" value="{{ valores.paciente_nome }}">
+  </div>
+  <div>
+    <label for="paciente_email">E-mail</label>
+    <input id="paciente_email" name="paciente_email" type="email" autocomplete="email"
+           required value="{{ valores.paciente_email }}">
+  </div>
+  <div>
+    <label for="especialidade">Especialidade</label>
+    <select id="especialidade" name="especialidade" required>
+      <option value="">Selecione</option>
+      {% for valor, nome in especialidades.items() %}
+      <option value="{{ valor }}" {% if valores.especialidade == valor %}selected{% endif %}>{{ nome }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="data">Data</label>
+    <input id="data" name="data" type="date" required value="{{ valores.data }}">
+  </div>
+  <div>
+    <label for="horario">Horário</label>
+    <select id="horario" name="horario" required aria-describedby="dica-horario">
+      <option value="">Selecione</option>
+      {% for horario in horarios %}
+      <option value="{{ horario }}" {% if valores.horario == horario %}selected{% endif %}>{{ horario }}</option>
+      {% endfor %}
+    </select>
+    <p id="dica-horario" class="dica">Atendimento de segunda a sexta, das 08:00 às 17:30.</p>
+  </div>
+  <div>
+    <label for="observacoes">Observações</label>
+    <textarea id="observacoes" name="observacoes" rows="3" maxlength="500">{{ valores.observacoes }}</textarea>
+  </div>
+  <div>
+    <button type="submit">Agendar</button>
+  </div>
+</form>
+{% endblock %}

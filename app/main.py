@@ -7,7 +7,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 
 from app.database import inicializar_banco
-from app.routes import api
+from app.routes import api, pages
 from app.services.agendamento import HorarioOcupado, RegraNegocioViolada
 from app.services.feriados import ServicoFeriadosIndisponivel
 
@@ -47,3 +47,4 @@ async def tratar_feriados_indisponivel(
 
 
 app.include_router(api.router)
+app.include_router(pages.router)

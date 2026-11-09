@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block titulo %}Consultas agendadas{% endblock %}
+{% block conteudo %}
+<h1>Consultas agendadas</h1>
+{% include "_mensagens.html" %}
+{% if consultas %}
+<table>
+  <caption>Lista de consultas, ordenada por data e horário</caption>
+  <thead>
+    <tr>
+      <th scope="col">Paciente</th>
+      <th scope="col">Especialidade</th>
+      <th scope="col">Data</th>
+      <th scope="col">Horário</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for consulta in consultas %}
+    <tr>
+      <td>{{ consulta.paciente_nome }}</td>
+      <td>{{ especialidades[consulta.especialidade.value] }}</td>
+      <td>{{ consulta.data | data_br }}</td>
+      <td>{{ consulta.horario.strftime("%H:%M") }}</td>
+      <td>
+        <form method="post" action="/consultas/{{ consulta.id }}/cancelar">
+          <button type="submit" class="perigo">Cancelar consulta de {{ consulta.paciente_nome }}</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>Nenhuma consulta agendada.</p>
+{% endif %}
+{% endblock %}

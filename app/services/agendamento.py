@@ -73,7 +73,7 @@ def validar_dia(data: date) -> None:
 
 def _mensagem_ocupado(entrada: ConsultaEntrada) -> str:
     return (
-        f"Já existe consulta de {entrada.especialidade.value} em"
+        f"Horário ocupado: já existe consulta de {entrada.especialidade.value} em"
         f" {_formatar(entrada.data)} às {entrada.horario.strftime('%H:%M')}."
     )
 

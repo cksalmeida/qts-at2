@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}{% endblock %} · Agenda de Consultas</title>
+  <style>
+    /* Paleta com contraste AA: texto #1a1a1a sobre #ffffff (≈17:1); botões #0b4f8a com texto branco (≈8:1). */
+    :root {
+      --texto: #1a1a1a;
+      --fundo: #ffffff;
+      --fundo-suave: #f2f4f7;
+      --borda: #6b7280;
+      --primaria: #0b4f8a;
+      --perigo: #a4161a;
+      --sucesso-fundo: #e6f4ea;
+      --sucesso-texto: #14532d;
+      --erro-fundo: #fdecea;
+      --erro-texto: #7f1d1d;
+      --foco: #b45309;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; font-size: 1rem; line-height: 1.5;
+           color: var(--texto); background: var(--fundo); }
+    header { background: var(--primaria); color: #fff; padding: 0.75rem 1rem; }
+    header nav ul { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
+    header a { color: #fff; font-weight: 600; }
+    main { max-width: 56rem; margin: 0 auto; padding: 1rem; }
+    /* Foco sempre visível (nunca remover o outline). */
+    a:focus-visible, button:focus-visible, input:focus-visible,
+    select:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--foco); outline-offset: 2px;
+    }
+    header a:focus-visible { outline-color: #fff; }
+    .mensagem { padding: 0.75rem 1rem; border-radius: 4px; margin-bottom: 1rem; border: 1px solid; }
+    .sucesso { background: var(--sucesso-fundo); color: var(--sucesso-texto); }
+    .erro { background: var(--erro-fundo); color: var(--erro-texto); }
+    table { width: 100%; border-collapse: collapse; }
+    caption { text-align: left; font-weight: 600; padding-bottom: 0.5rem; }
+    th, td { text-align: left; padding: 0.5rem; border-bottom: 1px solid var(--borda); }
+    th { background: var(--fundo-suave); }
+    form.campos { display: grid; gap: 1rem; max-width: 32rem; }
+    label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+    input, select, textarea { width: 100%; padding: 0.5rem; font: inherit; color: var(--texto);
+                              border: 1px solid var(--borda); border-radius: 4px; background: #fff; }
+    button { font: inherit; padding: 0.5rem 1rem; border: 0; border-radius: 4px; cursor: pointer;
+             color: #fff; background: var(--primaria); }
+    button.perigo { background: var(--perigo); }
+    .dica { font-size: 0.875rem; color: #374151; margin: 0.25rem 0 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav aria-label="Navegação principal">
+      <ul>
+        <li><a href="/">Consultas</a></li>
+        <li><a href="/agendar">Agendar consulta</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    {% block conteudo %}{% endblock %}
+  </main>
+</body>
+</html>
