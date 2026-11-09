@@ -10,17 +10,21 @@ TIMEOUT_SEGUNDOS = 5
 _cache: dict[int, dict[date, str]] = {}
 
 
+MENSAGEM_INDISPONIVEL = "Serviço de feriados indisponível. Tente novamente mais tarde."
+
+
 class ServicoFeriadosIndisponivel(Exception):
     """A BrasilAPI não respondeu corretamente; não é possível confirmar o dia útil."""
+
+    def __init__(self, mensagem: str = MENSAGEM_INDISPONIVEL) -> None:
+        super().__init__(mensagem)
 
 
 def _consultar_api(ano: int) -> list[dict]:
     try:
         resposta = httpx.get(URL.format(ano=ano), timeout=TIMEOUT_SEGUNDOS)
     except httpx.HTTPError as erro:
-        raise ServicoFeriadosIndisponivel(
-            "Serviço de feriados indisponível. Tente novamente mais tarde."
-        ) from erro
+        raise ServicoFeriadosIndisponivel() from erro
     if resposta.status_code != 200:
         raise ServicoFeriadosIndisponivel(
             f"Serviço de feriados indisponível (status {resposta.status_code})."
