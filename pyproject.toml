@@ -17,6 +17,7 @@ dependencies = [
 dev = [
     "axe-playwright-python>=0.1.8",
     "faker>=40.52.0",
+    "locust>=2.47.0",
     "pytest>=9.2.0",
     "pytest-mock>=3.17.0",
     "pytest-playwright>=0.10.0",
