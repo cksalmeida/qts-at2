@@ -1,7 +1,7 @@
 [project]
 name = "qts-at2"
 version = "0.1.0"
-description = "Add your description here"
+description = "Agenda de consultas médicas com verificação de feriados nacionais (SUT da AT2 de QTS)"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
